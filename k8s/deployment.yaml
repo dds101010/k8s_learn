@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+spec:
+  replicas: 3
+  selector:
+    # all pods that match these criteria will be considered in deployment scope
+    matchLabels:
+      app: hello-world-pod
+  template:
+    metadata:
+      labels:
+        app: hello-world-pod
+    spec:
+      containers:
+      - name: hello-world-container
+        image: darshah/k8s_learn:v2
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
