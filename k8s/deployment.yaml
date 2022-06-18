@@ -20,7 +20,7 @@ spec:
       labels:
         app: hello-world-pod
       annotations:
-        kubernetes.io/change-cause: "Updated container image to v2" # shows up in kubectl rollout history deployment/hello-world
+        kubernetes.io/change-cause: "Updated container image to v2" # shows up in kubectl rollout history deployment/hello-world-deployment
     spec:
       containers:
       - name: hello-world-container

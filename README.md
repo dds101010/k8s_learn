@@ -14,6 +14,11 @@ Directory `container` contains the code to build the sample images used througho
 2. MacOS
     - Colima
 
+IDE:
+  - VSCode
+    - oderwat.indent-rainbow
+    - ms-kubernetes-tools.vscode-kubernetes-tools
+
 ## Notes
 
 ### Deployment Strategies
