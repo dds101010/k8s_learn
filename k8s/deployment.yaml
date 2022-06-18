@@ -1,17 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world-deployment
+  name: hello-world-deployment # name shown for the deployment in kubectl commands. i.e. kubectl get deploy -> `deployment.apps/hello-world-deployment`
 spec:
   replicas: 3
+  # revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate # another possible value is Recreate. RollingUpdate is the default
+    rollingUpdate:
+      maxUnavailable: 1 # while upgrading, no more than 1 pod can be down at any time
+      maxSurge: 1 # total number of old+new pods can't go beyond spec.replica + spec.strategy.rollingUpdate.maxSurge
   selector:
     # all pods that match these criteria will be considered in deployment scope
+    # if kubectl finds any existing replicaset lying around that matches this, it will use it
     matchLabels:
       app: hello-world-pod
   template:
     metadata:
       labels:
         app: hello-world-pod
+      annotations:
+        kubernetes.io/change-cause: "Updated container image to v2" # shows up in kubectl rollout history deployment/hello-world
     spec:
       containers:
       - name: hello-world-container
@@ -21,5 +30,8 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+          - name: VERSION
+            value: "v2"
         ports:
         - containerPort: 80

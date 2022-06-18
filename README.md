@@ -14,3 +14,28 @@ Directory `container` contains the code to build the sample images used througho
 2. MacOS
     - Colima
 
+## Notes
+
+### Deployment Strategies
+
+```
+deployment.spec.strategy.type: (Recreate|RollingUpdate)
+```
+
+1. Recreate - stops all running pods and then creates newer ones
+2. RollingUpdate (default) - stopping and starting of pods is done in parallel to avoid downtime.
+
+*Exercise*
+```
+- kubectl delete -f k8s/deployment.yaml
+- Update k8s/deployment.yaml to point to version v1
+- kubectl apply -f k8s/deployment.yaml
+- kubectl rollout history deployment.apps/hello-world-deployment
+- kubectl port-forward deployment.apps/hello-world-deployment 4224:80
+- curl http://localhost:4224/
+- Update k8s/deployment.yaml to point to version v2
+- kubectl apply -f k8s/deployment.yaml
+- kubectl rollout history deployment.apps/hello-world-deployment
+- kubectl port-forward deployment.apps/hello-world-deployment 4224:80
+- curl http://localhost:4224/
+```
