@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharmacy-deployment
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: pharmacy-pod
+  template:
+    metadata:
+      labels:
+        app: pharmacy-pod
+        product: hospital
+    spec:
+      containers:
+      - name: pharmacy
+        image: darshah/k8s_learn_pharmacy:v2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+          - name: VERSION
+            value: "pharmacy:v2"
+          - name: INVENTORY_URL
+            value: "inventory-service" # since port is 80, it is implicit
+        ports:
+        - containerPort: 80

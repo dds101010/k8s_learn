@@ -21,6 +21,16 @@ IDE:
 
 ## Notes
 
+```
+kubectl api-resources
+```
+
+### Port Forwarding
+
+```
+kubectl port-forward deployment/hello-world-deployment 4224:80
+```
+
 ### Deployment Strategies
 
 ```
@@ -43,4 +53,21 @@ deployment.spec.strategy.type: (Recreate|RollingUpdate)
 - kubectl rollout history deployment.apps/hello-world-deployment
 - kubectl port-forward deployment.apps/hello-world-deployment 4224:80
 - curl http://localhost:4224/
+```
+
+### Services
+
+Types:
+  - ClusterIP (default)
+  - NodePort
+  - ExternalName
+  - LoadBalancer
+
+```
+kubectl describe svc inventory-service
+> Endpoints:         10.244.0.10:80,10.244.0.11:80
+
+kubectl get endpoints
+> NAME                ENDPOINTS                       AGE
+> inventory-service   10.244.0.10:80,10.244.0.11:80   3m11s
 ```

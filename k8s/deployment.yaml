@@ -4,7 +4,7 @@ metadata:
   name: hello-world-deployment # name shown for the deployment in kubectl commands. i.e. kubectl get deploy -> `deployment.apps/hello-world-deployment`
 spec:
   replicas: 3
-  # revisionHistoryLimit: 5
+  # revisionHistoryLimit: 5 # Interesting: setting it to 0 will remove the residual replicaset when updating the deployments
   strategy:
     type: RollingUpdate # another possible value is Recreate. RollingUpdate is the default
     rollingUpdate:

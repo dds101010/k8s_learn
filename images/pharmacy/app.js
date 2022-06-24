@@ -62,7 +62,9 @@ app.get('/api/v1/pharmacies', async (req, res) => {
 })
 
 async function getAllMedicines () {
-  const response = await fetch(`http://localhost:8081/api/v1/medicines`)
+  const URL = `http://${process.env.INVENTORY_URL}/api/v1/medicines`
+  console.log(`[${new Date()}] calling URL: ${URL}`)
+  const response = await fetch(URL)
   const payload = await response.json()
   
   // convert array to map

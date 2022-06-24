@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-deployment
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: inventory-pod
+  template:
+    metadata:
+      labels:
+        app: inventory-pod
+        product: hospital
+    spec:
+      containers:
+      - name: inventory
+        image: darshah/k8s_learn_inventory:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+          - name: VERSION
+            value: "inventory:v1"
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+spec:
+  type: ClusterIP
+  selector:
+    app: inventory-pod
+  ports:
+  - port: 80 # port through which other entities can communicate with the pods
+    targetPort: 80 # port on which the pods will be listening
