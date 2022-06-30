@@ -29,6 +29,10 @@ kubectl port-forward deployment/hello-world-deployment 4224:80
 kubectl get all -n metallb-system # for specific namespace
 kubectl get all --all-namespaces # for all namespaces
 kubectl explain service.spec.type # 😲
+kubectl get po --show-labels
+kubectl get po --selector="env=prod,tech=boot"
+kubectl get po -l env=prod,tech=boot # same effect as above
+docker system df
 ```
 
 ## Helpful Alias
@@ -93,3 +97,20 @@ kubectl get endpoints
 3. Run `minikube tunnel`
 4. Re-run `kubectl get svc`, you'll see External IP address assigned.
 5. Run `curl -s http://localhost:8080/api/v1/pharmacies | json origin` multiple times, you'll see variations in origin value i.e. load balancing.
+
+## Volumes
+
+### Empty Directory Volume
+ref: [empty_dir_volume_depl.yaml](k8s/empty_dir_volume_depl.yaml)
+
+Observe the following:
+1. `kubectl apply -f k8s/empty_dir_volume_depl.yaml`
+2. Wait for the pod to go into Running state
+3. `kubectl exec -it pod/<> -- sh`
+4. `cd scrub && touch hello.txt`
+5. `exit` (i.e. back to main terminal)
+6. `kubectl exec -it pod/<> -- sh` (go back to pod shell)
+7. `ls scrub && exit` (you can see the file still)
+8. `kubectl delete pod/<>` (delete the pod manually, a new pod will be created instantaneously)
+9. `kubectl exec -it pod/<> -- sh` (go back to pod shell)
+10. `ls scrub && exit` (you won't see the file present, because the volume was ephemeral, limited to the pod)

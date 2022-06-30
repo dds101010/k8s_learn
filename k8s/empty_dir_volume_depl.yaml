@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empty-dir-volume-test
+spec:
+  selector:
+    matchLabels:
+      app: alpine_pod
+  template:
+    metadata:
+      labels:
+        app: alpine_pod
+    spec:
+      volumes:
+        - name: empty-dir-volume
+          emptyDir: {}
+      containers:
+      - name: alpine-1
+        image: alpine:latest
+        command: ["/bin/sh", "-c", "sleep 3600"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+          - name: empty-dir-volume
+            mountPath: "/scrub"
