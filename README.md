@@ -114,3 +114,5 @@ Observe the following:
 8. `kubectl delete pod/<>` (delete the pod manually, a new pod will be created instantaneously)
 9. `kubectl exec -it pod/<> -- sh` (go back to pod shell)
 10. `ls scrub && exit` (you won't see the file present, because the volume was ephemeral, limited to the pod)
+
+<script src="https://asciinema.org/a/14.js" id="D4t9eJapc1sMfZuiupubWyGYv" async></script>
