@@ -101,18 +101,19 @@ kubectl get endpoints
 ## Volumes
 
 ### Empty Directory Volume
-ref: [empty_dir_volume_depl.yaml](k8s/empty_dir_volume_depl.yaml)
+- files: [empty_dir_volume_depl.yaml](k8s/empty_dir_volume_depl.yaml)
+- refs: https://dev.to/techworld_with_nana/difference-between-emptydir-and-hostpath-volume-types-in-kubernetes-286g
 
-Observe the following:
-1. `kubectl apply -f k8s/empty_dir_volume_depl.yaml`
-2. Wait for the pod to go into Running state
-3. `kubectl exec -it pod/<> -- sh`
-4. `cd scrub && touch hello.txt`
-5. `exit` (i.e. back to main terminal)
-6. `kubectl exec -it pod/<> -- sh` (go back to pod shell)
-7. `ls scrub && exit` (you can see the file still)
-8. `kubectl delete pod/<>` (delete the pod manually, a new pod will be created instantaneously)
-9. `kubectl exec -it pod/<> -- sh` (go back to pod shell)
-10. `ls scrub && exit` (you won't see the file present, because the volume was ephemeral, limited to the pod)
+An emptyDir volume is first created when a Pod is assigned to a Node, and exists as long as that Pod is running on that node.
 
-[![asciicast](https://asciinema.org/a/D4t9eJapc1sMfZuiupubWyGYv.svg)](https://asciinema.org/a/D4t9eJapc1sMfZuiupubWyGYv)
+As the name says, it is initially empty. All Containers in the same Pod can read and write in the same emptyDir volume.
+
+When a Pod is restarted or removed, the data in the emptyDir is lost forever.
+
+Some use cases for an emptyDir are:
+- scratch space, for a sort algorithm for example
+- when a long computation needs to be done in memory
+- as a cache
+
+[![asciicast](https://asciinema.org/a/sXDD9QqLCqwR6Cm97p5jshSXz.svg)](https://asciinema.org/a/sXDD9QqLCqwR6Cm97p5jshSXz)
+
