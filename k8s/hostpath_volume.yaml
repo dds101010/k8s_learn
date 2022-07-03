@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostpath-volume-dep
+spec:
+  replicas: 1 # modify this to see change in pod log output
+  selector:
+    matchLabels:
+      app: hostpath-test-pod
+  template:
+    metadata:
+      labels:
+        app: hostpath-test-pod
+    spec:
+      volumes:
+        - name: minikube-log-dir
+          hostPath:
+            path: "/var/log/pods"
+      containers:
+      - name: hostpath-volume
+        image: alpine:latest
+        command: [
+          "/bin/sh",
+          "-c",
+          "ls /minikube/pods | grep \"default_hostpath-volume-dep\"; sleep 3600"
+        ]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+          - name: minikube-log-dir
+            mountPath: "/minikube/pods"
+            readOnly: true

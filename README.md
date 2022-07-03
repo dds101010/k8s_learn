@@ -117,3 +117,33 @@ Some use cases for an emptyDir are:
 
 [![asciicast](https://asciinema.org/a/sXDD9QqLCqwR6Cm97p5jshSXz.svg)](https://asciinema.org/a/sXDD9QqLCqwR6Cm97p5jshSXz)
 
+### Host Path Volume
+- files: [hostpath_volume.yaml](k8s/hostpath_volume.yaml)
+
+A hostPath volume mounts a file or directory from the node's filesystem into the Pod. Note that if you're running k8s from Minikube, this is not a directory from your local system but a directory/file from the minikube node.
+
+Why we need this? - Not clear yet!
+
+### Difference between hostpath and emptydir?
+| hostPath | emptyDir |
+| --- | --- |
+| Scope: Node | Scope: Pod |
+| To share common space amongst pods of a node | To share common space amongst containers of a pod |
+
+### Persistent Volume and Persistent Volume Claim
+- ref: https://www.alibabacloud.com/blog/kubernetes-volume-basics-emptydir-and-persistentvolume_594834
+- files: [persistent_volume.yaml](k8s/persistent_volume.yaml), [persistent_volume_depl.yaml](k8s/persistent_volume_depl.yaml)
+
+If you need persistent volumes you use: PersistentVolume and PersistentVolumeClaim
+
+This is a 3 step process:
+
+You or the Kubernetes administrator defines a PersistentVolume ( Disk space available for use )
+You define a PersistentVolumeClaim - you claim usage of a part of that PersistentVolume disk space.
+You create a Pod that refers to your PersistentVolumeClaim
+
+**Persistent Volume Access Modes**
+  - ReadWriteOnce - can be mounted to single node
+  - ReadOnlyMany - can be mounted to multiple nodes
+  - ReadWriteMany - can be mounted to multiple nodes
+  - ReadWriteOncePod - can be mounted to only one pod under a cluster
