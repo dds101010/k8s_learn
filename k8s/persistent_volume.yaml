@@ -13,18 +13,3 @@ spec:
     path: "/home/docker/theOffice/"
   # volumeMode: FileSystem # default
   # persistentVolumeReclaimPolicy: Retain # default
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: office-staff-pvc
-spec:
-  resources:
-    requests:
-      storage: "100Mi"
-  # volumeMode: Filesystem
-  storageClassName: standard
-  accessModes:
-    - ReadWriteOnce

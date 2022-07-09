@@ -33,6 +33,7 @@ kubectl get po --show-labels
 kubectl get po --selector="env=prod,tech=boot"
 kubectl get po -l env=prod,tech=boot # same effect as above
 docker system df
+kubectl get sc,pv,pvc # get multiple resources in one command
 ```
 
 ## Helpful Alias
@@ -147,3 +148,15 @@ You create a Pod that refers to your PersistentVolumeClaim
   - ReadOnlyMany - can be mounted to multiple nodes
   - ReadWriteMany - can be mounted to multiple nodes
   - ReadWriteOncePod - can be mounted to only one pod under a cluster
+
+#### **ELI5**
+
+1. StorageClass
+    - These are generally defined by your Cloud providers. Each class defines the type of storage they offer, like fast, super-fast, medium, slow (may be effecting the overall cost you incur based on your choice of storage)
+2. PersistentVolume
+    - These are defined by your administrators. They basically say, we have 10 GB of super-fast storage available that can be accessed by only one node at a time.
+      - 10 GB -> `spec.capacity.storage`
+      - super-fast -> `spec.storageClassName`
+      - accessed by only one node at a time -> `spec.accessModes`
+3. PersistentVolumeClaim
+    - This is basically the cluster users asking for persistent storage. like you're deploying an application and you say, hey I want 100 MB of super-fast storage that can be accessed by multiple nodes simultaneously.
