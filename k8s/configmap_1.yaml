@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: person-details-cm
+data:
+  name: "John Doe"
+  age: "24"
+  email: "john@doe.com"
+  address: |
+    line_1: "221B, Baker Street"
+    line_2: "London"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-map-test-dep
+spec:
+  selector:
+    matchLabels:
+      app: config-map-test-pod
+  template:
+    metadata:
+      labels:
+        app: config-map-test-pod
+    spec:
+      containers:
+      - name: config-map-test-container
+        image: alpine
+        command: [
+          "/bin/sh", "-c", 
+          "env; ls -l /all_details; cat /address/address.properties; sleep 3600;"
+        ]
+        env:
+          - name: USER_FULL_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: person-details-cm
+                key: name
+          - name: USER_AGE
+            valueFrom:
+              configMapKeyRef:
+                name: person-details-cm
+                key: age
+        volumeMounts:
+          - mountPath: "/all_details"
+            name: all-details-volume
+          - mountPath: "/address"
+            name: address-details-volume
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:
+        - name: all-details-volume
+          configMap:
+            name: person-details-cm
+        - name: address-details-volume
+          configMap:
+            name: person-details-cm
+            items:
+              - key: "address"
+                path: "address.properties"

@@ -160,3 +160,50 @@ You create a Pod that refers to your PersistentVolumeClaim
       - accessed by only one node at a time -> `spec.accessModes`
 3. PersistentVolumeClaim
     - This is basically the cluster users asking for persistent storage. like you're deploying an application and you say, hey I want 100 MB of super-fast storage that can be accessed by multiple nodes simultaneously.
+
+## ConfigMaps
+- files: [configmap_1.yaml](k8s/configmap_1.yaml)
+
+> ConfigMaps consumed as environment variables are not updated automatically and require a pod restart. ConfigMaps mounted as Volumes are synced periodically
+
+Can be mounted three ways:
+
+1. As environment variable
+
+```yaml
+env:
+  - name: USER_FULL_NAME
+    valueFrom:
+      configMapKeyRef:
+        name: person-details-cm
+        key: name
+```
+
+2. All Properties mounted as Volume - In this case there will be one file for each property
+
+```yaml
+volumeMounts:
+  - mountPath: "/all_details"
+    name: all-details-volume
+...
+volumes:
+  - name: all-details-volume
+    configMap:
+      name: person-details-cm
+```
+
+3. Specific set of properties mounted as Volume
+
+```yaml
+volumeMounts:
+  - mountPath: "/address"
+    name: address-details-volume
+...
+volumes:
+  - name: address-details-volume
+    configMap:
+      name: person-details-cm
+      items:
+        - key: "address"
+          path: "address.properties"
+```
