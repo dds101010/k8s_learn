@@ -17,18 +17,18 @@ spec:
           hostPath:
             path: "/var/log/pods"
       containers:
-      - name: hostpath-volume
-        image: alpine:latest
-        command: [
-          "/bin/sh",
-          "-c",
-          "ls /minikube/pods | grep \"default_hostpath-volume-dep\"; sleep 3600"
-        ]
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        volumeMounts:
-          - name: minikube-log-dir
-            mountPath: "/minikube/pods"
-            readOnly: true
+        - name: hostpath-volume
+          image: alpine:latest
+          command: [
+            "/bin/sh",
+            "-c",
+            "ls /minikube/pods | grep \"default_hostpath-volume-dep\"; sleep 3600"
+          ]
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: minikube-log-dir
+              mountPath: "/minikube/pods"
+              readOnly: true

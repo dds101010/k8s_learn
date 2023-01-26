@@ -7,12 +7,12 @@ metadata:
     app: hello-world-pod
 spec:
   containers:
-  - name: hello-world-container
-    image: darshah/k8s_learn:v1
-    imagePullPolicy: IfNotPresent
-    resources:
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
-    ports:
-      - containerPort: 80
+    - name: hello-world-container
+      image: darshah/k8s_learn:v1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 80

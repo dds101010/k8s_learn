@@ -15,23 +15,23 @@ spec:
         - name: empty-dir-volume
           emptyDir: {}
       containers:
-      - name: alpine-1
-        image: alpine:latest
-        command: ["/bin/sh", "-c", "sleep 3600"]
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        volumeMounts:
-          - name: empty-dir-volume
-            mountPath: "/scrub"
-      - name: alpine-2
-        image: alpine:latest
-        command: ["/bin/sh", "-c", "sleep 3600"]
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        volumeMounts:
-          - name: empty-dir-volume
-            mountPath: "/scrub"
+        - name: alpine-1
+          image: alpine:latest
+          command: ["/bin/sh", "-c", "sleep 3600"]
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: empty-dir-volume
+              mountPath: "/scrub"
+        - name: alpine-2
+          image: alpine:latest
+          command: ["/bin/sh", "-c", "sleep 3600"]
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: empty-dir-volume
+              mountPath: "/scrub"

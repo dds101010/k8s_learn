@@ -16,20 +16,20 @@ spec:
           persistentVolumeClaim:
             claimName: office-staff-pvc
       containers:
-      - name: office-staff-server
-        image: alpine:latest
-        command: [
-          "/bin/sh",
-          "-c",
-          "cat /office/staff/staff.txt; sleep 3600"
-        ]
-        volumeMounts:
-          - mountPath: "/office/staff"
-            name: empl-vol
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        - name: office-staff-server
+          image: alpine:latest
+          command: [
+            "/bin/sh",
+            "-c",
+            "cat /office/staff/staff.txt; sleep 3600"
+          ]
+          volumeMounts:
+            - mountPath: "/office/staff"
+              name: empl-vol
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
 
 ---
 

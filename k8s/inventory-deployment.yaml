@@ -15,17 +15,17 @@ spec:
         product: hospital
     spec:
       containers:
-      - name: inventory
-        image: darshah/k8s_learn_inventory:v1
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        env:
-          - name: VERSION
-            value: "inventory:v1"
-        ports:
-        - containerPort: 80
+        - name: inventory
+          image: darshah/k8s_learn_inventory:v1
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: VERSION
+              value: "inventory:v1"
+          ports:
+            - containerPort: 80
 
 ---
 
@@ -38,5 +38,5 @@ spec:
   selector:
     app: inventory-pod
   ports:
-  - port: 80 # port through which other entities can communicate with the pods
-    targetPort: 80 # port on which the pods will be listening
+    - port: 80 # port through which other entities can communicate with the pods
+      targetPort: 80 # port on which the pods will be listening

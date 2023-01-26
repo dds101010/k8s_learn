@@ -26,32 +26,32 @@ spec:
         app: config-map-test-pod
     spec:
       containers:
-      - name: config-map-test-container
-        image: alpine
-        command: [
-          "/bin/sh", "-c", 
-          "env; ls -l /all_details; cat /address/address.properties; sleep 3600;"
-        ]
-        env:
-          - name: USER_FULL_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: person-details-cm
-                key: name
-          - name: USER_AGE
-            valueFrom:
-              configMapKeyRef:
-                name: person-details-cm
-                key: age
-        volumeMounts:
-          - mountPath: "/all_details"
-            name: all-details-volume
-          - mountPath: "/address"
-            name: address-details-volume
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        - name: config-map-test-container
+          image: alpine
+          command: [
+            "/bin/sh", "-c", 
+            "env; ls -l /all_details; cat /address/address.properties; sleep 3600;"
+          ]
+          env:
+            - name: USER_FULL_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: person-details-cm
+                  key: name
+            - name: USER_AGE
+              valueFrom:
+                configMapKeyRef:
+                  name: person-details-cm
+                  key: age
+          volumeMounts:
+            - mountPath: "/all_details"
+              name: all-details-volume
+            - mountPath: "/address"
+              name: address-details-volume
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
       volumes:
         - name: all-details-volume
           configMap:
