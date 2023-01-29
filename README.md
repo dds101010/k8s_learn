@@ -99,6 +99,10 @@ kubectl get endpoints
 4. Re-run `kubectl get svc`, you'll see External IP address assigned.
 5. Run `curl -s http://localhost:8080/api/v1/pharmacies | json origin` multiple times, you'll see variations in origin value i.e. load balancing.
 
+### Access Service in same and another namespace
+- In the same namespace, another service can be accessed just with service name itself
+- If the service exists in another namespace, then: `service-name.namespace.svc.cluster.local` (cluster.local if both namespace exists in the same cluster)
+
 ## Volumes
 
 ### Empty Directory Volume
