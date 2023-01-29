@@ -22,7 +22,6 @@ IDE:
 
 # Notes
 
-
 ```sh
 kubectl api-resources
 kubectl port-forward deployment/hello-world-deployment 4224:80
@@ -34,6 +33,14 @@ kubectl get po --selector="env=prod,tech=boot"
 kubectl get po -l env=prod,tech=boot # same effect as above
 docker system df
 kubectl get sc,pv,pvc # get multiple resources in one command
+```
+
+## Dry-run
+
+```sh
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+kubectl create deployment --image=nginx nginx --dry-run -o yaml
+
 ```
 
 ## Helpful Alias
@@ -50,7 +57,20 @@ alias kno='kubectl get no -o wide'
 alias kdesc='kubectl describe'
 ```
 
-### Deployment Strategies
+## Imperative commands for creating resources
+
+```sh
+kubectl run redis --image=redis # pod
+kubectl create deployment nginx --image=nginx --replicas=4 # deployment
+kubectl scale deployment nginx --replicas=1 # scaling
+kubectl expose pod redis --port=6379 --name redis-service # service
+kubectl create service clusterip redis --tcp=6379:6379 # service (assumption for label selector: app=redis)
+
+kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080
+```
+
+## Deployment Strategies
 
 ```
 deployment.spec.strategy.type: (Recreate|RollingUpdate)
