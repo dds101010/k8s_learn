@@ -207,3 +207,9 @@ volumes:
         - key: "address"
           path: "address.properties"
 ```
+
+### Scaling replicaset 
+
+1. Update the YAML file and do `kubectl apply -f replicaset.yaml`. (This only works if replicaset was created using YAML)
+2. Edit the replicaset i.e. `kubectl edit new-replica-set`, update the count and save
+3. Use scale command i.e. `kubectl scale --replicas=2 replicaset new-replica-set`
