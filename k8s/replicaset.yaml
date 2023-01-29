@@ -13,10 +13,10 @@ spec:
         name: busybox-pod
     spec:
       containers:
-      - command:
-        - sh
-        - -c
-        - echo Hello Kubernetes! && sleep 3600
+        - command:
+          - sh
+          - -c
+          - echo Hello Kubernetes! && sleep 3600
         image: busybox
         name: busybox-container
   replicas: 4
