@@ -43,6 +43,13 @@ kubectl create deployment --image=nginx nginx --dry-run -o yaml
 
 ```
 
+### Quick dry-run using export
+```sh
+export do="--dry-run=client -o yaml"
+
+kubectl run nginx --image nginx:alpine $do
+```
+
 ## Helpful Alias
 ```sh
 alias kpo='kubectl get po -o wide'
