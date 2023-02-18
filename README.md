@@ -261,3 +261,11 @@ k create token dashboard-sa
 kubectl set serviceaccount deploy/web-dashboard dashboard-sa # or
 k explain deployment.spec.template.spec.serviceAccountName
 ```
+
+## Resources
+
+parameter | values | implication
+---- | ---- | -----
+CPU | 0.5, 1, 2, 5 | 1 == 1 AWS vCPU, 1 GCP Core, 1 Azure Core, 1 Hyperthread
+Memory | 256Mi, 1Gi, 1G | 1 Ki = 1024 bytes, 1 K = 1000 bytes
+Disk | | 
