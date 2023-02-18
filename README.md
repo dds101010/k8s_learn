@@ -244,3 +244,20 @@ volumes:
 1. Update the YAML file and do `kubectl apply -f replicaset.yaml`. (This only works if replicaset was created using YAML)
 2. Edit the replicaset i.e. `kubectl edit new-replica-set`, update the count and save
 3. Use scale command i.e. `kubectl scale --replicas=2 replicaset new-replica-set`
+
+## Service Accounts
+
+- User account is an account used by human to communicate with k8s cluster.
+- Service account is an account used by a service to communicate with k8s cluster (i.e. prometheus)
+  - bearer token (stored in a secret)
+
+- each namespace has its own `default` service account (which is restricted in terms of access available to it).
+- this default service account is mounted by default if no other service account is specified.
+
+```sh
+k create sa dashboard-sa
+k create token dashboard-sa
+
+kubectl set serviceaccount deploy/web-dashboard dashboard-sa # or
+k explain deployment.spec.template.spec.serviceAccountName
+```
