@@ -24,6 +24,8 @@ IDE:
 
 ```sh
 kubectl api-resources
+kubectl explain pod.spec.containers.livenessProbe # ⭐ very important
+
 kubectl port-forward deployment/hello-world-deployment 4224:80
 kubectl get all -n metallb-system # for specific namespace
 kubectl get all --all-namespaces # for all namespaces
