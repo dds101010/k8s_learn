@@ -278,3 +278,10 @@ parameter | values | implication
 CPU | 0.5, 1, 2, 5 | 1 == 1 AWS vCPU, 1 GCP Core, 1 Azure Core, 1 Hyperthread
 Memory | 256Mi, 1Gi, 1G | 1 Ki = 1024 bytes, 1 K = 1000 bytes
 Disk | | 
+
+## Commands
+
+### Labels and Selectors
+```sh
+k get all --selector env=prod,tier=frontend
+```
