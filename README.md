@@ -66,6 +66,13 @@ alias kno='kubectl get no -o wide'
 alias kdesc='kubectl describe'
 ```
 
+### with using `vim`
+
+```sh
+k get rs something | vim -
+# :setfiletype yaml <- for better syntax highlighting and YAML features in VIM
+```
+
 ## Imperative commands for creating resources
 
 ```sh
