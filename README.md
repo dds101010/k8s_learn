@@ -69,7 +69,7 @@ alias kdesc='kubectl describe'
 ### with using `vim`
 
 ```sh
-k get rs something | vim -
+k get rs something -o yaml | vim -
 # :setfiletype yaml <- for better syntax highlighting and YAML features in VIM
 ```
 
