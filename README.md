@@ -285,3 +285,21 @@ Disk | |
 ```sh
 k get all --selector env=prod,tier=frontend
 ```
+
+## Notes
+
+#### Difference between `apply`, `create` and `replace`
+  - ref: https://stackoverflow.com/a/64872478/21828739
+```
+┌─────────┬───────────────────────┬────────────────────────┐
+│ command │ object does not exist │ object already exists  │
+├─────────┼───────────────────────┼────────────────────────┤
+│ create  │ create new object     │          ERROR         │ 
+│         │                       │                        │
+│ apply   │ create new object     │ configure object       │
+│         │ (needs complete spec) │ (accepts partial spec) │
+│         │                       │                        │
+│ replace │         ERROR         │ delete object          │
+│         │                       │ create new object      │
+└─────────┴───────────────────────┴────────────────────────┘
+```
