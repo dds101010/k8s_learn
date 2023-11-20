@@ -35,6 +35,11 @@ kubectl get po --selector="env=prod,tech=boot"
 kubectl get po -l env=prod,tech=boot # same effect as above
 docker system df
 kubectl get sc,pv,pvc # get multiple resources in one command
+
+# get current namespace
+kubectl config view --minify | grep namesapce
+# set namespace
+kubectl config set-context --current --namespace=app-ns
 ```
 
 ## Dry-run
