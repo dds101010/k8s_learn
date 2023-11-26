@@ -71,7 +71,7 @@ alias kno='kubectl get no -o wide'
 alias kdesc='kubectl describe'
 
 alias kdbg='kubectl run debug --image=busybox --rm -it -- sh'
-kdbg wget -oO- http://<ip>:<port>/text # ⭐ very important
+kdbg wget -qO- http://<ip>:<port>/text # ⭐ very important
 ```
 
 ### with using `vim`
