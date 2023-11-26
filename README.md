@@ -53,7 +53,7 @@ alias kg="kubectl get"
 alias kgo="kubectl get -o yaml"
 alias kdry="kubectl --dry-run=client -o yaml"
 alias kd="kubectl describe"
-alias kdbg="kubectl run debug --image=busybox --rm -it -- sh"
+alias kdbg="kubectl run debug --image=busybox --rm -it -- "
 alias kn="kubectl config set-context --current --namespace"
 
 # kdbg wget -qO- http://<ip>:<port>/text # ⭐ very important
