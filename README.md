@@ -20,9 +20,54 @@ IDE:
     - oderwat.indent-rainbow
     - ms-kubernetes-tools.vscode-kubernetes-tools
 
+# 🚨 Must do! at the start of exam 🚨
+
+## ~/.vimrc
+
+```vim
+syntax on
+set number
+set hlsearch
+set ignorecase
+set cursorcolumn
+
+set tabstop=2
+set shiftwidth=2
+set sts=2
+
+set autoindent
+```
+
+```bash
+# :setfiletype yaml <- for better syntax highlighting and YAML features in VIM
+# :set paste <- for pasting from documentation, then do :set nopaste
+# :gg=G <- this will re-indent the whole file. very useful. but make sure you've set the filetype to YAML
+```
+
+## ~/.bashrc
+```bash
+source <(kubectl completion bash)
+
+alias k="kubectl"
+alias kg="kubectl get"
+alias kgo="kubectl get -o yaml"
+alias kdry="kubectl --dry-run=client -o yaml"
+alias kd="kubectl describe"
+alias kdbg="kubectl run debug --image=busybox --rm -it -- sh"
+alias kn="kubectl config set-context --current --namespace"
+
+# kdbg wget -qO- http://<ip>:<port>/text # ⭐ very important
+```
+
+## Load bookmarks?
+
+https://github.com/reetasingh/CKAD-Bookmarks
+
+
+
 # Notes
 
-```sh
+```bash
 kubectl api-resources
 kubectl explain pod.spec.containers.livenessProbe # ⭐ very important
 
@@ -50,35 +95,10 @@ kubectl create deployment --image=nginx nginx --dry-run -o yaml
 
 ```
 
-### Quick dry-run using export
-```sh
-export do="--dry-run=client -o yaml"
-
-kubectl run nginx --image nginx:alpine $do
-```
-
-## Helpful Alias
-```sh
-alias kpo='kubectl get po -o wide'
-alias kpow='kubectl get po -w'
-alias ksvc='kubectl get svc  -o wide'
-alias ksvcw='kubectl get svc -w'
-alias kdep='kubectl get deploy  -o wide'
-alias kdepw='kubectl get deploy -w'
-alias kall='kubectl get all -o wide'
-alias kalln='kubectl get all --all-namespaces'
-alias kno='kubectl get no -o wide'
-alias kdesc='kubectl describe'
-
-alias kdbg='kubectl run debug --image=busybox --rm -it -- sh'
-kdbg wget -qO- http://<ip>:<port>/text # ⭐ very important
-```
-
 ### with using `vim`
 
 ```sh
 k get rs something -o yaml | vim -
-# :setfiletype yaml <- for better syntax highlighting and YAML features in VIM
 ```
 
 ## Imperative commands for creating resources
@@ -293,6 +313,9 @@ Disk | |
 ```sh
 k get all --selector env=prod,tier=frontend
 ```
+
+### Imperative commands
+- ref: https://dev.to/marcoieni/ckad-2021-tips-vimrc-bashrc-and-cheatsheet-hp3 - good set of commands to memorize/habituate
 
 ## Notes
 
