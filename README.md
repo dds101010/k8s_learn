@@ -69,6 +69,9 @@ alias kall='kubectl get all -o wide'
 alias kalln='kubectl get all --all-namespaces'
 alias kno='kubectl get no -o wide'
 alias kdesc='kubectl describe'
+
+alias kdbg='kubectl run debug --image=busybox --rm -it -- sh'
+kdbg wget -oO- http://<ip>:<port>/text # ⭐ very important
 ```
 
 ### with using `vim`
