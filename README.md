@@ -83,6 +83,7 @@ kubectl get sc,pv,pvc # get multiple resources in one command
 
 # get current namespace
 kubectl config view --minify | grep namesapce
+kubectl config view --minify -o json | jq '.contexts[].context.namespace'
 # set namespace
 kubectl config set-context --current --namespace=app-ns
 ```
