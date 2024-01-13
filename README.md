@@ -56,6 +56,9 @@ alias kd="kubectl describe"
 alias kdbg="kubectl run debug --image=busybox --restart=Never --rm -it -- "
 alias kn="kubectl config set-context --current --namespace"
 
+alias ke="kubectl explain"
+alias ker="kubectl explain --recursive"
+
 # kdbg wget -qO- http://<ip>:<port>/text # ⭐ very important
 ```
 
